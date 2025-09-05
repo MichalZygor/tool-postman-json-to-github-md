@@ -105,12 +105,12 @@
 
       flatten(collectionJson.item||[]);
 
-      let md = `# ${collectionJson.info?.name || 'Kolekcja Postman'}\n\n`;
+      let md = `# ${collectionJson.info?.name || 'Postman Collection'}\n\n`;
       md += `## Contents\n\n<a name="contents"></a>\n\n`;
 
       const groups={};
       endpoints.forEach(ep=>{
-        const g = ep.trail[0] || 'Bez grupy';
+        const g = ep.trail[0] || 'Without a group';
         if(!groups[g]) groups[g]=[];
         groups[g].push(ep);
       });
@@ -118,7 +118,7 @@
       for(const g in groups){
         md += `### ${g}\n\n`;
         groups[g].forEach(ep=>{
-          const title = (ep.trail.join(' » ') || 'Bez grupy') + ' » ' + ep.method;
+          const title = (ep.trail.join(' » ') || 'Without a group') + ' » ' + ep.method;
           const linkAnchor = anchor(title + '-' + ep.urlRaw);
           md += `- [${title} \`${ep.urlRaw}\`](#${linkAnchor})\n`;
         });
@@ -127,7 +127,7 @@
       md += '---\n\n';
 
       endpoints.forEach(ep=>{
-        const title = (ep.trail.join(' » ') || 'Bez grupy') + ' » ' + ep.method;
+        const title = (ep.trail.join(' » ') || 'Without a group') + ' » ' + ep.method;
         const anchorName = anchor(title + '-' + ep.urlRaw);
         md += `<a name="${anchorName}"></a>\n\n`;
         md += `## ${title} \`${ep.urlRaw}\`\n\n`;
